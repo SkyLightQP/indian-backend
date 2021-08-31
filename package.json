@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "log4js": "^6.3.0",
+    "mysql2": "^2.3.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.5",
     "sequelize-typescript": "^2.1.0"

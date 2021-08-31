@@ -1,5 +1,4 @@
 import cors from 'cors';
-import dotenv from 'dotenv';
 import express from 'express';
 import helmet from 'helmet';
 import log4js from 'log4js';
@@ -7,8 +6,6 @@ import { sequelize } from './database';
 
 export const app = express();
 export const logger = log4js.getLogger();
-
-dotenv.config();
 
 log4js.configure({
   appenders: {

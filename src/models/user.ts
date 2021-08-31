@@ -1,12 +1,12 @@
-import { Column, CreatedAt, DeletedAt, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-@Table
+@Table({ timestamps: true, paranoid: true })
 export class User extends Model {
   @Column({ primaryKey: true })
   uuid!: string;
 
-  @Column
-  id!: string;
+  @Column({ type: DataType.STRING, field: 'id' })
+  userId!: string;
 
   @Column
   password!: string;
@@ -16,16 +16,4 @@ export class User extends Model {
 
   @Column
   nickname!: string;
-
-  @CreatedAt
-  @Column
-  createdAt!: Date;
-
-  @UpdatedAt
-  @Column
-  updatedAt!: Date;
-
-  @DeletedAt
-  @Column
-  deletedAt?: Date;
 }

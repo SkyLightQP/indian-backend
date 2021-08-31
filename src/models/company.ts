@@ -1,11 +1,11 @@
-import { Column, CreatedAt, HasMany, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { GameBoard } from './gameBoard';
 import { CompanyBoard } from './companyBoard';
 
-@Table
+@Table({ timestamps: true })
 export class Company extends Model {
-  @Column({ primaryKey: true })
-  id!: string;
+  @Column({ type: DataType.UUID, primaryKey: true, field: 'id' })
+  companyId!: string;
 
   @Column
   name!: string;
@@ -18,12 +18,4 @@ export class Company extends Model {
 
   @HasMany(() => CompanyBoard)
   companyBoards!: CompanyBoard[];
-
-  @CreatedAt
-  @Column
-  createdAt!: Date;
-
-  @UpdatedAt
-  @Column
-  updatedAt!: Date;
 }

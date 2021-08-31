@@ -1,10 +1,10 @@
-import { BelongsTo, Column, CreatedAt, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { Company } from './company';
 
-@Table
+@Table({ timestamps: true })
 export class GameBoard extends Model {
-  @Column({ primaryKey: true })
-  id!: string;
+  @Column({ type: DataType.STRING, primaryKey: true, field: 'id' })
+  boardId!: string;
 
   @Column
   title!: string;
@@ -18,17 +18,10 @@ export class GameBoard extends Model {
   @Column
   startLink!: string;
 
+  @ForeignKey(() => Company)
   @Column
   companyId!: string;
 
-  @BelongsTo(() => Company, { foreignKey: 'companyId' })
+  @BelongsTo(() => Company)
   company!: Company;
-
-  @CreatedAt
-  @Column
-  createdAt!: Date;
-
-  @UpdatedAt
-  @Column
-  updatedAt!: Date;
 }

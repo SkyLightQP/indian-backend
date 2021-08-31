@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import helmet from 'helmet';
 import log4js from 'log4js';
+import { sequelize } from './database';
 
 export const app = express();
 export const logger = log4js.getLogger();
@@ -35,3 +36,7 @@ app.use(helmet());
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+sequelize.sync().catch((e) => {
+  logger.error(`데이터베이스 오류: ${e}`);
+});

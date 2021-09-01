@@ -1,27 +1,40 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { Company } from './company';
 
-@Table({ timestamps: true })
-export class GameBoard extends Model {
-  @Column({ type: DataType.STRING, primaryKey: true, field: 'id' })
-  boardId!: string;
+@Entity({ name: 'game_boards' })
+export class GameBoard {
+  @PrimaryColumn()
+  id!: string;
 
-  @Column
+  @Column()
   title!: string;
 
-  @Column
+  @Column()
   content!: string;
 
-  @Column
+  @Column()
   tags!: string;
 
-  @Column
+  @Column()
   startLink!: string;
 
-  @ForeignKey(() => Company)
-  @Column
+  @JoinColumn()
   companyId!: string;
 
-  @BelongsTo(() => Company)
+  @ManyToOne(() => Company, (company) => company.gameBoards)
   company!: Company;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
 }

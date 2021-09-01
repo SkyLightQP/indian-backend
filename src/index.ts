@@ -1,8 +1,12 @@
+import 'reflect-metadata';
+
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import log4js from 'log4js';
-import { sequelize } from './database';
+import { getRepository } from 'typeorm';
+import { db } from './database';
+import { User } from './models/user';
 
 export const app = express();
 export const logger = log4js.getLogger();
@@ -34,6 +38,6 @@ app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-sequelize.sync().catch((e) => {
+db().catch((e) => {
   logger.error(`데이터베이스 오류: ${e}`);
 });

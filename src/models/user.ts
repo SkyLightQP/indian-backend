@@ -1,19 +1,35 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn
+} from 'typeorm';
 
-@Table({ timestamps: true, paranoid: true })
-export class User extends Model {
-  @Column({ primaryKey: true })
+@Entity({ name: 'users' })
+export class User {
+  @PrimaryColumn()
   uuid!: string;
 
-  @Column({ type: DataType.STRING, field: 'id' })
-  userId!: string;
+  @Column()
+  id!: string;
 
-  @Column
+  @Column()
   password!: string;
 
-  @Column
+  @Column()
   email!: string;
 
-  @Column
+  @Column()
   nickname!: string;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

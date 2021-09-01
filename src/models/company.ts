@@ -1,21 +1,34 @@
-import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
-import { GameBoard } from './gameBoard';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { CompanyBoard } from './companyBoard';
+import { GameBoard } from './gameBoard';
 
-@Table({ timestamps: true })
-export class Company extends Model {
-  @Column({ type: DataType.UUID, primaryKey: true, field: 'id' })
-  companyId!: string;
+@Entity({ name: 'companies' })
+export class Company {
+  @PrimaryColumn()
+  id!: string;
 
-  @Column
+  @Column()
   name!: string;
 
-  @Column
+  @Column()
   link!: string;
 
-  @HasMany(() => GameBoard)
-  gameBoards!: GameBoard[];
+  @CreateDateColumn()
+  createdAt!: Date;
 
-  @HasMany(() => CompanyBoard)
+  @UpdateDateColumn()
+  updatedAt!: Date;
+
+  @OneToMany(() => CompanyBoard, (companyBoard) => companyBoard.company)
   companyBoards!: CompanyBoard[];
+
+  @OneToMany(() => GameBoard, (gameBoard) => gameBoard.company)
+  gameBoards!: GameBoard[];
 }

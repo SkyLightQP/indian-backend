@@ -2,20 +2,21 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: ['plugin:@typescript-eslint/recommended', 'airbnb-base', 'eslint-config-prettier'],
   rules: {
-    'arrow-body-style': 'off',
-    'comma-dangle': 'off',
-    'object-curly-newline': 'off',
-    'linebreak-style': 'off',
-    'no-plusplus': 'off',
-    'no-continue': 'off',
+    'arrow-body-style': 0,
+    'comma-dangle': 0,
+    'object-curly-newline': 0,
+    'linebreak-style': 0,
+    'no-plusplus': 0,
+    'no-continue': 0,
+    'class-methods-use-this': 0,
 
-    'import/no-unresolved': 'off',
-    'import/extensions': 'off',
-    'import/prefer-default-export': 'off',
+    'import/no-unresolved': 0,
+    'import/extensions': 0,
+    'import/prefer-default-export': 0,
 
-    'no-shadow': 'off',
+    'no-shadow': 0,
     '@typescript-eslint/no-shadow': ['error'],
-    'no-unused-vars': 'off',
+    'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': ['error']
   }
 };

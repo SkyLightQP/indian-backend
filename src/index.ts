@@ -10,9 +10,29 @@ import { db } from './database';
 import { registerPassport } from './auth';
 import { config } from './config';
 import Router from './controllers';
+import { IErrorCode } from './common/error/errorCode';
 
 export const app = express();
 export const logger = log4js.getLogger();
+
+app.response.sendData = function (status: number, data: unknown) {
+  this.status(status).json({
+    data,
+    error: null
+  });
+};
+app.response.sendError = function (error: IErrorCode) {
+  this.status(error.status).json({
+    data: null,
+    error: error.message
+  });
+};
+app.response.sendErrorMessage = function (status: number, error: string) {
+  this.status(status).json({
+    data: null,
+    error
+  });
+};
 
 log4js.configure({
   appenders: {

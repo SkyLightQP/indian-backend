@@ -1,3 +1,5 @@
+import { IErrorCode } from '../../src/common/error/errorCode';
+
 export {};
 
 declare global {
@@ -15,5 +17,11 @@ declare global {
 
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     export interface User extends UserModel {}
+
+    export interface Response {
+      sendData: (status: number, data: unknown) => void;
+      sendError: (error: IErrorCode) => void;
+      sendErrorMessage: (status: number, message: string) => void;
+    }
   }
 }

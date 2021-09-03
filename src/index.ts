@@ -4,9 +4,8 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import log4js from 'log4js';
-import { getRepository } from 'typeorm';
 import { db } from './database';
-import { User } from './models/user';
+import { registerPassport } from './auth';
 
 export const app = express();
 export const logger = log4js.getLogger();
@@ -41,3 +40,5 @@ app.use(express.json());
 db().catch((e) => {
   logger.error(`데이터베이스 오류: ${e}`);
 });
+
+registerPassport();

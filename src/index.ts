@@ -7,6 +7,7 @@ import log4js from 'log4js';
 import { db } from './database';
 import { registerPassport } from './auth';
 import { config } from './config';
+import Router from './controllers';
 
 export const app = express();
 export const logger = log4js.getLogger();
@@ -43,3 +44,5 @@ db().catch((e) => {
 });
 
 registerPassport();
+
+app.use('/', Router);

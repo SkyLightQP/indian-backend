@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import passport from 'passport';
 import { ErrorCode } from '../common/error/errorCode';
 import { logger } from '../index';
+import { authenticated } from '../common/middlewares/auth.middleware';
 
 export const CONTROLLER_NAME = '/auth';
 const router = express.Router();
@@ -54,7 +55,7 @@ router.post('/register', async (req: Request, res: Response, next: NextFunction)
   })(req, res, next);
 });
 
-router.delete('/logout', (req: express.Request, res: express.Response) => {
+router.delete('/logout', authenticated, (req: Request, res: Response) => {
   const result = req.user;
 
   if (!result) return;

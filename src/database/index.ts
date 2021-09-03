@@ -1,11 +1,11 @@
 import { createConnection } from 'typeorm';
 import { config } from '../config';
-import { User } from '../models/user';
+import { User } from '../models/user.model';
 import { Company } from '../models/company';
 import { CompanyBoard } from '../models/companyBoard';
-import { GameBoard } from '../models/gameBoard';
+import { GameBoard } from '../models/gameBoard.model';
 
-export const db = (): ReturnType<typeof createConnection> =>
+export const db = async (): ReturnType<typeof createConnection> =>
   createConnection({
     type: 'mysql',
     host: config.DATABASE_HOST,

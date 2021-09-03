@@ -1,13 +1,6 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryColumn,
-  UpdateDateColumn
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 import { CompanyBoard } from './companyBoard';
-import { GameBoard } from './gameBoard';
+import { GameBoard } from './gameBoard.model';
 
 @Entity({ name: 'companies' })
 export class Company {

@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import { User } from '../models/user';
+import { User } from '../models/user.model';
 import { HttpException } from '../common/exception';
 import { ErrorCode } from '../common/error/errorCode';
 

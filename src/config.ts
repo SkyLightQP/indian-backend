@@ -9,6 +9,6 @@ export const config = {
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD ?? 'password',
   DATABASE_DB: process.env.DATABASE_DB ?? 'indian',
   CORS: process.env.CORS ?? 'http://localhost:3000',
-  SALT: process.env.SALT ?? 1,
+  SALT: Number(process.env.SALT) ?? 1,
   SESSION_SECRET: process.env.SESSION_SECRET ?? 'secret'
 };

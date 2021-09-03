@@ -15,5 +15,9 @@ export const ErrorCode = createError({
   USER_ALREADY_EXISTS: {
     message: '이미 사용 중인 아이디입니다.',
     status: 409
+  },
+  SERVER_ERROR: {
+    message: '잠시후 다시 시도해주세요.',
+    status: 500
   }
 });

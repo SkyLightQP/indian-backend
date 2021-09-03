@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import log4js from 'log4js';
 import { db } from './database';
 import { registerPassport } from './auth';
+import { config } from './config';
 
 export const app = express();
 export const logger = log4js.getLogger();
@@ -17,7 +18,7 @@ log4js.configure({
     },
     default: {
       type: 'file',
-      filename: 'logs/log.log',
+      filename: 'logs/indian.log',
       pattern: '-yyyy-MM-dd',
       compress: true
     }
@@ -33,7 +34,7 @@ logger.level = 'ALL';
 
 app.set('trust proxy', true);
 app.use(helmet());
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: config.CORS, credentials: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

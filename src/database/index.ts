@@ -1,4 +1,4 @@
-import { createConnection } from 'typeorm';
+import { createConnection, getConnection, Repository } from 'typeorm';
 import { config } from '../config';
 import { User } from '../models/user.model';
 import { Company } from '../models/company';
@@ -16,3 +16,8 @@ export const db = async (): ReturnType<typeof createConnection> =>
     entities: [User, Company, CompanyBoard, GameBoard],
     synchronize: process.env.NODE_ENV !== 'production'
   });
+
+export const userRepository = (): Repository<User> => getConnection().getRepository(User);
+export const companyRepository = (): Repository<Company> => getConnection().getRepository(Company);
+export const companyBoardRepository = (): Repository<CompanyBoard> => getConnection().getRepository(CompanyBoard);
+export const gameBoardRepository = (): Repository<GameBoard> => getConnection().getRepository(GameBoard);

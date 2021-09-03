@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryColumn, Upda
 
 @Entity({ name: 'users' })
 export class User {
-  @PrimaryColumn()
+  @PrimaryColumn({ generated: 'uuid' })
   uuid!: string;
 
   @Column()

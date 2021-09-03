@@ -48,7 +48,7 @@ export const createUser = async (props: CreateUserProps): Promise<User> => {
   });
   if (user) throw new HttpException(ErrorCode.USER_ALREADY_EXISTS.message, ErrorCode.USER_ALREADY_EXISTS.status);
 
-  return userRepository().create(props);
+  return userRepository().save(props);
 };
 
 export const updateUser = async (uuid: string, data: Partial<UpdateUserProps>): Promise<User> => {

@@ -1,12 +1,12 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { Validator } from 'class-validator';
-import { deserialize } from 'json-typescript-mapper';
+import { plainToClass } from 'class-transformer';
 
 export const validateBody =
   <T>(dto: { new (): T extends unknown ? any : any }) =>
   (req: Request, res: Response, next: NextFunction): RequestHandler | undefined => {
     const validator = new Validator();
-    const error = validator.validateSync(deserialize(dto, req.body));
+    const error = validator.validateSync(plainToClass(dto, req.body));
 
     if (error.length > 0) {
       res.status(400).json({

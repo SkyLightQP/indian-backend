@@ -3,11 +3,14 @@ import passport from 'passport';
 import { ErrorCode } from '../common/error/errorCode';
 import { logger } from '../index';
 import { authenticated } from '../common/middlewares/auth.middleware';
+import { validateBody } from '../common/middlewares/validator.middleware';
+import { AuthRegisterDto } from './dto/auth-register.dto';
+import { AuthLoginDto } from './dto/auth-login.dto';
 
 export const CONTROLLER_NAME = '/auth';
 const router = express.Router();
 
-router.post('/login', (req: Request, res: Response, next: NextFunction) => {
+router.post('/login', validateBody(AuthLoginDto), (req: Request, res: Response, next: NextFunction) => {
   passport.authenticate('login', async (error, user, info) => {
     if (error) {
       res.sendError(ErrorCode.SERVER_ERROR);
@@ -36,7 +39,7 @@ router.post('/login', (req: Request, res: Response, next: NextFunction) => {
   })(req, res, next);
 });
 
-router.post('/register', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/register', validateBody(AuthRegisterDto), async (req: Request, res: Response, next: NextFunction) => {
   passport.authenticate('register', async (error, user, info) => {
     if (error) {
       res.sendError(ErrorCode.SERVER_ERROR);
@@ -64,6 +67,10 @@ router.delete('/logout', authenticated, (req: Request, res: Response) => {
   req.logout();
 
   res.sendData(200, result);
+});
+
+router.get('/me', authenticated, (req: Request, res: Response) => {
+  res.sendData(200, req.user);
 });
 
 export default router;

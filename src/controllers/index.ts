@@ -1,8 +1,12 @@
 import express from 'express';
-import AuthController, { CONTROLLER_NAME } from './auth.controller';
+import fs from 'fs';
 
 const router = express.Router();
 
-router.use(CONTROLLER_NAME, AuthController);
+fs.readdirSync(__dirname).forEach(async (file) => {
+  if (file === 'index.ts' || file === 'index.js') return;
+  const i = await import(`./${file}`);
+  router.use(i.CONTROLLER_NAME, i.default);
+});
 
 export default router;

@@ -57,7 +57,7 @@ logger.level = 'ALL';
 
 app.set('trust proxy', true);
 app.use(helmet());
-app.use(cors({ origin: config.CORS, credentials: true }));
+app.use(cors({ origin: [config.CORS, 'http://localhost:3000'], credentials: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
@@ -67,7 +67,7 @@ app.use(
     saveUninitialized: true,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: false,
       maxAge: Date.now() + 7 * 86400 * 1000
     }
   })

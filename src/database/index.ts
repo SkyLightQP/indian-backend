@@ -1,8 +1,8 @@
 import { createConnection, getConnection, Repository } from 'typeorm';
 import { config } from '../config';
 import { User } from '../models/user.model';
-import { Company } from '../models/company';
-import { CompanyBoard } from '../models/companyBoard';
+import { Company } from '../models/company.model';
+import { CompanyBoard } from '../models/companyBoard.model';
 import { GameBoard } from '../models/gameBoard.model';
 
 export const db = async (): ReturnType<typeof createConnection> =>

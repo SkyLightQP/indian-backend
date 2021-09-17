@@ -1,17 +1,9 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryColumn,
-  UpdateDateColumn
-} from 'typeorm';
-import { Company } from './company';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import { Company } from './company.model';
 
 @Entity({ name: 'game_boards' })
 export class GameBoard {
-  @PrimaryColumn()
+  @PrimaryColumn({ generated: 'uuid' })
   id!: string;
 
   @Column()

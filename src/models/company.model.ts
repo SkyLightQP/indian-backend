@@ -1,10 +1,10 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { CompanyBoard } from './companyBoard.model';
 import { GameBoard } from './gameBoard.model';
 
 @Entity({ name: 'companies' })
 export class Company {
-  @PrimaryColumn({ generated: 'uuid' })
+  @PrimaryGeneratedColumn('uuid')
   id!: string;
 
   @Column()

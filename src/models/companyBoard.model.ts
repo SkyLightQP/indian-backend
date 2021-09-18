@@ -1,9 +1,17 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { Company } from './company.model';
 
 @Entity({ name: 'company_boards' })
 export class CompanyBoard {
-  @PrimaryColumn({ generated: 'uuid' })
+  @PrimaryGeneratedColumn('uuid')
   id!: string;
 
   @Column()

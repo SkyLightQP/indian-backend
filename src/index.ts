@@ -70,7 +70,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 db().catch((e) => {
-  logger.error(`데이터베이스 오류: ${e}`);
+  logger.error(`데이터베이스 연결 중 오류가 발생하였습니다:`, e);
 });
 
 registerPassport();

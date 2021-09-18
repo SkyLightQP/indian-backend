@@ -36,19 +36,13 @@ app.response.sendErrorMessage = function (status: number, error: string) {
 
 log4js.configure({
   appenders: {
-    console: {
-      type: 'console'
-    },
     default: {
-      type: 'file',
-      filename: 'logs/indian.log',
-      pattern: '-yyyy-MM-dd',
-      compress: true
+      type: 'console'
     }
   },
   categories: {
     default: {
-      appenders: ['default', 'console'],
+      appenders: ['default'],
       level: 'DEBUG'
     }
   }

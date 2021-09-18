@@ -25,8 +25,8 @@ export class CompanyBoard {
   @Column()
   tags!: string;
 
-  @Column({ nullable: true })
-  link!: string | null;
+  @Column()
+  link!: string;
 
   @OneToMany(() => GameBoard, (gameBoard) => gameBoard.companyBoard)
   gameBoards!: GameBoard[];

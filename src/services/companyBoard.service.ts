@@ -1,0 +1,64 @@
+import { companyBoardRepository } from '../database';
+import { HttpException } from '../common/exception';
+import { ErrorCode } from '../common/error/errorCode';
+import { CompanyBoard } from '../models/companyBoard.model';
+
+interface CreateAndUpdateCompanyBoardProps {
+  name: string;
+  description: string;
+  tags: string;
+  link: string;
+  writerId?: string;
+}
+
+export const getCompanyBoards = async (): Promise<CompanyBoard[]> => {
+  return companyBoardRepository().find();
+};
+
+export const getCompanyBoard = async (id: string): Promise<CompanyBoard> => {
+  const result = await companyBoardRepository().findOne({
+    where: {
+      id
+    }
+  });
+  if (!result)
+    throw new HttpException(ErrorCode.COMPANY_BOARD_NOT_FOUND.message, ErrorCode.COMPANY_BOARD_NOT_FOUND.status);
+  return result;
+};
+
+export const createCompanyBoard = async (props: CreateAndUpdateCompanyBoardProps): Promise<CompanyBoard> => {
+  const result = await companyBoardRepository().findOne({
+    where: {
+      name: props.name
+    }
+  });
+  if (result) {
+    throw new HttpException(
+      ErrorCode.COMPANY_BOARD_ALREADY_EXISTS.message,
+      ErrorCode.COMPANY_BOARD_ALREADY_EXISTS.status
+    );
+  }
+
+  return companyBoardRepository().save(props);
+};
+
+export const updateCompanyBoard = async (
+  id: string,
+  data: Partial<CreateAndUpdateCompanyBoardProps>
+): Promise<CompanyBoard> => {
+  const company = await getCompanyBoard(id);
+  const { raw } = await companyBoardRepository().update(
+    {
+      id: company.id
+    },
+    data
+  );
+  return raw[0];
+};
+
+export const deleteCompanyBoard = async (id: string): Promise<void> => {
+  const company = await getCompanyBoard(id);
+  await companyBoardRepository().delete({
+    id: company.id
+  });
+};

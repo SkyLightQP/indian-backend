@@ -4,10 +4,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
-import { Company } from './company.model';
+import { GameBoard } from './gameBoard.model';
+import { User } from './user.model';
 
 @Entity({ name: 'company_boards' })
 export class CompanyBoard {
@@ -15,19 +17,25 @@ export class CompanyBoard {
   id!: string;
 
   @Column()
-  title!: string;
+  name!: string;
 
   @Column()
-  content!: string;
+  description!: string;
 
   @Column()
   tags!: string;
 
-  @JoinColumn()
-  companyId!: string;
+  @Column({ nullable: true })
+  link!: string | null;
 
-  @ManyToOne(() => Company, (company) => company.companyBoards)
-  company!: Company;
+  @OneToMany(() => GameBoard, (gameBoard) => gameBoard.companyBoard)
+  gameBoards!: GameBoard[];
+
+  @JoinColumn()
+  writerId!: string | null;
+
+  @ManyToOne(() => User, (user) => user.companyBoards, { nullable: true })
+  writer!: User | null;
 
   @CreateDateColumn()
   createdAt!: Date;

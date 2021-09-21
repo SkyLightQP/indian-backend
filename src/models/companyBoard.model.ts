@@ -19,13 +19,13 @@ export class CompanyBoard {
   @Column()
   name!: string;
 
-  @Column()
+  @Column({ default: '' })
   description!: string;
 
-  @Column()
+  @Column({ default: '' })
   tags!: string;
 
-  @Column()
+  @Column({ default: '' })
   link!: string;
 
   @OneToMany(() => GameBoard, (gameBoard) => gameBoard.companyBoard)

@@ -18,13 +18,13 @@ export class GameBoard {
   @Column()
   title!: string;
 
-  @Column()
+  @Column({ default: '' })
   content!: string;
 
-  @Column()
+  @Column({ default: '' })
   tags!: string;
 
-  @Column()
+  @Column({ default: '' })
   startLink!: string;
 
   @JoinColumn()

@@ -1,15 +1,12 @@
 import express from 'express';
-import fs from 'fs';
+
+const routers = [import('./auth.controller'), import('./company.controller'), import('./game.controller')];
 
 const router = express.Router();
 
-fs.readdirSync(__dirname).forEach(async (file) => {
-  if (file.includes('.ts') || file.includes('.js')) {
-    if (file !== 'index.ts' && file !== 'index.js') {
-      const i = await import(`./${file}`);
-      router.use(i.CONTROLLER_NAME, i.default);
-    }
-  }
+routers.forEach(async (r) => {
+  const controller = await r;
+  router.use(controller.CONTROLLER_NAME, controller.default);
 });
 
 export default router;

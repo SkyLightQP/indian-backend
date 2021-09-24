@@ -27,7 +27,7 @@ export class GameBoard {
   @Column({ default: '' })
   startLink!: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   image!: string | null;
 
   @JoinColumn()

@@ -24,24 +24,26 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', authenticated, validateBody(CompanyCreateDto), async (req, res) => {
-  const { name, description, tags, link } = req.body;
+  const { name, description, tags, link, image } = req.body;
   const data = await createCompanyBoard({
     name,
     description,
     tags,
     link,
+    image,
     writerId: req.user?.uuid
   });
   res.sendData(201, data);
 });
 
 router.patch('/:id', authenticated, validateBody(CompanyUpdateDto), async (req, res) => {
-  const { name, description, tags, link } = req.body;
+  const { name, description, tags, link, image } = req.body;
   const data = await updateCompanyBoard(req.params.id, {
     name,
     description,
     tags,
-    link
+    link,
+    image
   });
   res.sendData(200, data);
 });

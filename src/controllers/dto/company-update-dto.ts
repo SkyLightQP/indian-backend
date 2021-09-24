@@ -15,5 +15,9 @@ export class CompanyUpdateDto {
 
   @IsString()
   @IsOptional()
+  image?: string;
+
+  @IsString()
+  @IsOptional()
   link?: string;
 }

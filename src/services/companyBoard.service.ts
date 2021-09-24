@@ -9,6 +9,7 @@ interface CreateAndUpdateCompanyBoardProps {
   description: string;
   tags: string;
   link: string;
+  image?: string;
   writerId?: string;
 }
 

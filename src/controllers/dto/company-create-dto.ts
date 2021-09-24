@@ -18,5 +18,9 @@ export class CompanyCreateDto {
 
   @IsString()
   @IsOptional()
+  image?: string;
+
+  @IsString()
+  @IsOptional()
   writerId?: string;
 }

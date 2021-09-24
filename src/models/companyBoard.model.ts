@@ -28,6 +28,9 @@ export class CompanyBoard {
   @Column({ default: '' })
   link!: string;
 
+  @Column({ type: 'varchar', nullable: true })
+  image!: string | null;
+
   @OneToMany(() => GameBoard, (gameBoard) => gameBoard.companyBoard)
   gameBoards!: GameBoard[];
 

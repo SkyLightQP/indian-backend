@@ -2,6 +2,7 @@ import { companyBoardRepository } from '../database';
 import { HttpException } from '../common/exception';
 import { ErrorCode } from '../common/error/errorCode';
 import { CompanyBoard } from '../models/companyBoard.model';
+import { getUserByUuid } from './user.service';
 
 interface CreateAndUpdateCompanyBoardProps {
   name: string;
@@ -27,6 +28,11 @@ export const getCompanyBoard = async (id: string): Promise<CompanyBoard> => {
 };
 
 export const createCompanyBoard = async (props: CreateAndUpdateCompanyBoardProps): Promise<CompanyBoard> => {
+  if (props.writerId) {
+    const user = await getUserByUuid(props.writerId);
+    if (!user) throw new HttpException(ErrorCode.USER_NOT_FOUND.message, ErrorCode.USER_NOT_FOUND.status);
+  }
+
   const result = await companyBoardRepository().findOne({
     where: {
       name: props.name
@@ -44,7 +50,7 @@ export const createCompanyBoard = async (props: CreateAndUpdateCompanyBoardProps
 
 export const updateCompanyBoard = async (
   id: string,
-  data: Partial<CreateAndUpdateCompanyBoardProps>
+  data: Omit<Partial<CreateAndUpdateCompanyBoardProps>, 'writerId'>
 ): Promise<CompanyBoard> => {
   const company = await getCompanyBoard(id);
   const { raw } = await companyBoardRepository().update(

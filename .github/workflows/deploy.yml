@@ -1,0 +1,38 @@
+name: indian-backend-deploy
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */9 * * *'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Build
+        env:
+          CI: true
+        run: yarn build
+
+      - name: Move build file
+        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        with:
+          ftp-server: ${{ secrets.FTP_HOST }}
+          ftp-username: ${{ secrets.USERNAME }}
+          ftp-password: ${{ secrets.PASSWORD }}
+          local-dir: ./dist/
+          git-ftp-args: --insecure

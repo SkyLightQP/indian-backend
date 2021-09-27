@@ -16,7 +16,9 @@ interface CreateAndUpdateGameBoardProps {
 }
 
 export const getGameBoards = async (): Promise<GameBoard[]> => {
-  return gameBoardRepository().find();
+  return gameBoardRepository().find({
+    relations: ['companyBoard']
+  });
 };
 
 export const getGameBoard = async (id: string): Promise<GameBoard> => {

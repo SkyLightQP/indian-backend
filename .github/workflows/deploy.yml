@@ -36,3 +36,15 @@ jobs:
           ftp-password: ${{ secrets.PASSWORD }}
           local-dir: ./dist/
           git-ftp-args: --insecure
+
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            cd backend
+            yarn
+            pm2 stop 2
+            pm2 start "node ./dist/bundle.js" --name 2

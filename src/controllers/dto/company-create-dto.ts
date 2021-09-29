@@ -18,8 +18,4 @@ export class CompanyCreateDto {
   @IsString()
   @IsOptional()
   image?: string;
-
-  @IsString()
-  @IsOptional()
-  writerUuid?: string;
 }

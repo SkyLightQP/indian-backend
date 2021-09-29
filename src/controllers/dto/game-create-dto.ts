@@ -21,8 +21,4 @@ export class GameCreateDto {
 
   @IsString()
   companyBoardId!: string;
-
-  @IsString()
-  @IsOptional()
-  writerUuid?: string;
 }

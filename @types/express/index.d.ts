@@ -12,7 +12,7 @@ declare global {
       readonly nickname: string;
       readonly createdAt: Date;
       readonly updatedAt: Date;
-      readonly deletedAt?: Date;
+      readonly deletedAt: Date | null;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-empty-interface

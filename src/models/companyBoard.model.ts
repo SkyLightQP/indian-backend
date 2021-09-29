@@ -16,16 +16,16 @@ export class CompanyBoard {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column()
+  @Column({ nullable: false })
   name!: string;
 
-  @Column({ default: '' })
-  description!: string;
+  @Column({ type: 'varchar', nullable: true })
+  description!: string | null;
 
-  @Column({ default: '' })
-  tags!: string;
+  @Column({ type: 'varchar', nullable: true })
+  tags!: string | null;
 
-  @Column({ default: '' })
+  @Column({ nullable: false })
   link!: string;
 
   @Column({ type: 'varchar', nullable: true })
@@ -40,9 +40,9 @@ export class CompanyBoard {
   @ManyToOne(() => User, (user) => user.companyBoards, { nullable: true })
   writer!: User | null;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ nullable: false })
   createdAt!: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ nullable: false })
   updatedAt!: Date;
 }

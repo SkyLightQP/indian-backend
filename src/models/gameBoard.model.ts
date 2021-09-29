@@ -15,16 +15,16 @@ export class GameBoard {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column()
+  @Column({ nullable: false })
   title!: string;
 
-  @Column({ default: '' })
-  content!: string;
+  @Column({ type: 'varchar', nullable: true })
+  content!: string | null;
 
-  @Column({ default: '' })
-  tags!: string;
+  @Column({ type: 'varchar', nullable: true })
+  tags!: string | null;
 
-  @Column({ default: '' })
+  @Column({ nullable: false })
   startLink!: string;
 
   @Column({ type: 'varchar', nullable: true })
@@ -33,7 +33,7 @@ export class GameBoard {
   @JoinColumn()
   companyId!: string;
 
-  @ManyToOne(() => CompanyBoard, (company) => company.gameBoards)
+  @ManyToOne(() => CompanyBoard, (company) => company.gameBoards, { nullable: false })
   companyBoard!: CompanyBoard;
 
   @JoinColumn()
@@ -42,9 +42,9 @@ export class GameBoard {
   @ManyToOne(() => User, (user) => user.gameBoards, { nullable: true })
   writer!: User | null;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ nullable: false })
   createdAt!: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ nullable: false })
   updatedAt!: Date;
 }

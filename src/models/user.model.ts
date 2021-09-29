@@ -15,16 +15,16 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   uuid!: string;
 
-  @Column()
+  @Column({ nullable: false })
   id!: string;
 
-  @Column()
+  @Column({ nullable: false })
   password!: string;
 
-  @Column()
+  @Column({ nullable: false })
   email!: string;
 
-  @Column()
+  @Column({ nullable: false })
   nickname!: string;
 
   @OneToMany(() => GameBoard, (gameBoard) => gameBoard.writer)
@@ -33,12 +33,12 @@ export class User {
   @OneToMany(() => CompanyBoard, (companyBoard) => companyBoard.writer)
   companyBoards!: CompanyBoard[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ nullable: false })
   createdAt!: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ nullable: false })
   updatedAt!: Date;
 
-  @DeleteDateColumn()
-  deletedAt?: Date;
+  @DeleteDateColumn({ nullable: true })
+  deletedAt!: Date | null;
 }

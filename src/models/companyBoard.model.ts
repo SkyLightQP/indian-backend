@@ -35,10 +35,10 @@ export class CompanyBoard {
   gameBoards!: GameBoard[];
 
   @JoinColumn()
-  writerId!: string | null;
+  writerUuid!: string | null;
 
   @ManyToOne(() => User, (user) => user.companyBoards, { nullable: true })
-  writerUuid!: User | null;
+  writer!: User | null;
 
   @CreateDateColumn({ nullable: false })
   createdAt!: Date;

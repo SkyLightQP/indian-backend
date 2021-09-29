@@ -32,7 +32,7 @@ router.post('/', authenticated, validateBody(GameCreateDto), async (req, res) =>
     startLink,
     image,
     writerId: req.user?.uuid,
-    companyId
+    companyBoardId: companyId
   });
   res.sendData(201, data);
 });

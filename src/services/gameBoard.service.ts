@@ -11,7 +11,7 @@ interface CreateAndUpdateGameBoardProps {
   tags: string;
   startLink: string;
   image?: string;
-  companyId: string;
+  companyBoardId: string;
   writerId?: string;
 }
 
@@ -37,7 +37,7 @@ export const createGameBoard = async (props: CreateAndUpdateGameBoardProps): Pro
     if (!user) throw new HttpException(ErrorCode.USER_NOT_FOUND.message, ErrorCode.USER_NOT_FOUND.status);
   }
 
-  if (!(await getCompanyBoard(props.companyId))) {
+  if (!(await getCompanyBoard(props.companyBoardId))) {
     throw new HttpException(ErrorCode.COMPANY_BOARD_NOT_FOUND.message, ErrorCode.COMPANY_BOARD_NOT_FOUND.status);
   }
 

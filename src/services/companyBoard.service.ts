@@ -6,11 +6,11 @@ import { getUserByUuid } from './user.service';
 
 interface CreateAndUpdateCompanyBoardProps {
   name: string;
-  description: string;
-  tags: string;
+  description?: string;
+  tags?: string;
   link: string;
   image?: string;
-  writerId?: string;
+  writerUuid: string;
 }
 
 export const getCompanyBoards = async (): Promise<CompanyBoard[]> => {
@@ -29,8 +29,8 @@ export const getCompanyBoard = async (id: string): Promise<CompanyBoard> => {
 };
 
 export const createCompanyBoard = async (props: CreateAndUpdateCompanyBoardProps): Promise<CompanyBoard> => {
-  if (props.writerId) {
-    const user = await getUserByUuid(props.writerId);
+  if (props.writerUuid) {
+    const user = await getUserByUuid(props.writerUuid);
     if (!user) throw new HttpException(ErrorCode.USER_NOT_FOUND.message, ErrorCode.USER_NOT_FOUND.status);
   }
 

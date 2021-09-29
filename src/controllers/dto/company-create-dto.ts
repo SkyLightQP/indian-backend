@@ -13,8 +13,7 @@ export class CompanyCreateDto {
   tags?: string;
 
   @IsString()
-  @IsOptional()
-  link?: string;
+  link!: string;
 
   @IsString()
   @IsOptional()
@@ -22,5 +21,5 @@ export class CompanyCreateDto {
 
   @IsString()
   @IsOptional()
-  writerId?: string;
+  writerUuid?: string;
 }

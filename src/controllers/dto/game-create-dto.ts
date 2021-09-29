@@ -13,17 +13,16 @@ export class GameCreateDto {
   tags?: string;
 
   @IsString()
-  @IsOptional()
-  startLink?: string;
+  startLink!: string;
 
   @IsString()
   @IsOptional()
   image?: string;
 
   @IsString()
-  companyId!: string;
+  companyBoardId!: string;
 
   @IsString()
   @IsOptional()
-  writerId?: string;
+  writerUuid?: string;
 }

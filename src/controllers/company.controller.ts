@@ -25,13 +25,14 @@ router.get('/:id', async (req: Request, res: Response) => {
 
 router.post('/', authenticated, validateBody(CompanyCreateDto), async (req, res) => {
   const { name, description, tags, link, image } = req.body;
+  if (!req.user) return;
   const data = await createCompanyBoard({
     name,
     description,
     tags,
     link,
     image,
-    writerId: req.user?.uuid
+    writerUuid: req.user.uuid
   });
   res.sendData(201, data);
 });

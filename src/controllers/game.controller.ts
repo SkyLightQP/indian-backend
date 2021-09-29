@@ -24,15 +24,16 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', authenticated, validateBody(GameCreateDto), async (req, res) => {
-  const { title, content, tags, startLink, image, companyId } = req.body;
+  const { title, content, tags, startLink, image, companyBoardId } = req.body;
+  if (!req.user) return;
   const data = await createGameBoard({
     title,
     content,
     tags,
     startLink,
     image,
-    writerId: req.user?.uuid,
-    companyBoardId: companyId
+    writerUuid: req.user.uuid,
+    companyBoardId
   });
   res.sendData(201, data);
 });

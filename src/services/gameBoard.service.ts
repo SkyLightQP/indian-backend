@@ -7,12 +7,12 @@ import { getCompanyBoard } from './companyBoard.service';
 
 interface CreateAndUpdateGameBoardProps {
   title: string;
-  content: string;
-  tags: string;
+  content?: string;
+  tags?: string;
   startLink: string;
   image?: string;
   companyBoardId: string;
-  writerId?: string;
+  writerUuid: string;
 }
 
 export const getGameBoards = async (): Promise<GameBoard[]> => {
@@ -32,8 +32,8 @@ export const getGameBoard = async (id: string): Promise<GameBoard> => {
 };
 
 export const createGameBoard = async (props: CreateAndUpdateGameBoardProps): Promise<GameBoard> => {
-  if (props.writerId) {
-    const user = await getUserByUuid(props.writerId);
+  if (props.writerUuid) {
+    const user = await getUserByUuid(props.writerUuid);
     if (!user) throw new HttpException(ErrorCode.USER_NOT_FOUND.message, ErrorCode.USER_NOT_FOUND.status);
   }
 

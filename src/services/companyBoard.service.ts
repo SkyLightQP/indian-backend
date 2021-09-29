@@ -29,10 +29,8 @@ export const getCompanyBoard = async (id: string): Promise<CompanyBoard> => {
 };
 
 export const createCompanyBoard = async (props: CreateAndUpdateCompanyBoardProps): Promise<CompanyBoard> => {
-  if (props.writerUuid) {
-    const user = await getUserByUuid(props.writerUuid);
-    if (!user) throw new HttpException(ErrorCode.USER_NOT_FOUND.message, ErrorCode.USER_NOT_FOUND.status);
-  }
+  const user = await getUserByUuid(props.writerUuid);
+  if (!user) throw new HttpException(ErrorCode.USER_NOT_FOUND.message, ErrorCode.USER_NOT_FOUND.status);
 
   const result = await companyBoardRepository().findOne({
     where: {
@@ -46,7 +44,10 @@ export const createCompanyBoard = async (props: CreateAndUpdateCompanyBoardProps
     );
   }
 
-  return companyBoardRepository().save(props);
+  return companyBoardRepository().save({
+    ...props,
+    writer: user
+  });
 };
 
 export const updateCompanyBoard = async (

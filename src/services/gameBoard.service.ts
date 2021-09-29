@@ -32,12 +32,11 @@ export const getGameBoard = async (id: string): Promise<GameBoard> => {
 };
 
 export const createGameBoard = async (props: CreateAndUpdateGameBoardProps): Promise<GameBoard> => {
-  if (props.writerUuid) {
-    const user = await getUserByUuid(props.writerUuid);
-    if (!user) throw new HttpException(ErrorCode.USER_NOT_FOUND.message, ErrorCode.USER_NOT_FOUND.status);
-  }
+  const user = await getUserByUuid(props.writerUuid);
+  if (!user) throw new HttpException(ErrorCode.USER_NOT_FOUND.message, ErrorCode.USER_NOT_FOUND.status);
 
-  if (!(await getCompanyBoard(props.companyBoardId))) {
+  const company = await getCompanyBoard(props.companyBoardId);
+  if (!company) {
     throw new HttpException(ErrorCode.COMPANY_BOARD_NOT_FOUND.message, ErrorCode.COMPANY_BOARD_NOT_FOUND.status);
   }
 
@@ -50,7 +49,11 @@ export const createGameBoard = async (props: CreateAndUpdateGameBoardProps): Pro
     throw new HttpException(ErrorCode.GAME_BOARD_ALREADY_EXISTS.message, ErrorCode.GAME_BOARD_ALREADY_EXISTS.status);
   }
 
-  return gameBoardRepository().save(props);
+  return gameBoardRepository().save({
+    ...props,
+    companyBoard: company,
+    writer: user
+  });
 };
 
 export const updateGameBoard = async (

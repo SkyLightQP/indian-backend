@@ -31,13 +31,13 @@ export class GameBoard {
   image!: string | null;
 
   @JoinColumn()
-  companyId!: string;
+  companyBoardId!: string;
 
   @ManyToOne(() => CompanyBoard, (company) => company.gameBoards, { nullable: false })
   companyBoard!: CompanyBoard;
 
   @JoinColumn()
-  writerId!: string | null;
+  writerUuid!: string | null;
 
   @ManyToOne(() => User, (user) => user.gameBoards, { nullable: true })
   writer!: User | null;

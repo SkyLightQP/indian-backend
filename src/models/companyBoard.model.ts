@@ -38,7 +38,7 @@ export class CompanyBoard {
   writerId!: string | null;
 
   @ManyToOne(() => User, (user) => user.companyBoards, { nullable: true })
-  writer!: User | null;
+  writerUuid!: User | null;
 
   @CreateDateColumn({ nullable: false })
   createdAt!: Date;

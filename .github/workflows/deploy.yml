@@ -47,4 +47,5 @@ jobs:
             cd backend
             yarn
             pm2 stop 2
-            pm2 start "node ./dist/bundle.js" --name 2
+            pm2 delete 2
+            pm2 start "yarn start:production" --name 2

@@ -31,10 +31,10 @@ export class GameBoard {
   image!: string | null;
 
   @JoinColumn()
-  companyBoardId!: string;
+  companyBoardId!: string | null;
 
-  @ManyToOne(() => CompanyBoard, (company) => company.gameBoards, { nullable: false })
-  companyBoard!: CompanyBoard;
+  @ManyToOne(() => CompanyBoard, (company) => company.gameBoards, { nullable: true })
+  companyBoard!: CompanyBoard | null;
 
   @JoinColumn()
   writerUuid!: string | null;
